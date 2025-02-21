@@ -5,6 +5,7 @@
     <color name="purpleTitle">#933996</color>
     <color name="purpleBackground">#e9bef3</color>
     <color name="purpleTitleBackground">#fde0ff</color>
+    <color name="purpleDescription">#6b3f7d</color>
     <color name="gray">#808080</color>
 </resources>
 
