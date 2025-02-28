@@ -27,6 +27,11 @@
         <activity android:name=".HomepageActivity" android:exported="true" />
         <activity android:name=".LoginActivity" android:exported="true" />
         <activity android:name=".RegisterActivity" android:exported="true" />
+        <activity android:name=".OrderActivity" android:exported="true" />
+        <activity android:name=".PaymentActivity" android:exported="true" />
+        <activity android:name=".ThanksActivity" android:exported="true" />
+        <activity android:name=".MenuActivity" android:exported="true" />
+        <activity android:name=".HistoryActivity" android:exported="true" />
     </application>
 
 </manifest>

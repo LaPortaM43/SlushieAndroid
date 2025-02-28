@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- activity_payment.xml -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_payment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentActivity"
+    android:background="@color/purpleTitleBackground">
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:contentDescription="App Logo"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_slushie_logo"
+        app:layout_constraintBottom_toTopOf="@id/paymentTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/paymentTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mock Payment"
+        android:textAlignment="center"
+        android:fontFamily="@font/verdana_font"
+        android:textColor="@color/purpleTitle"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:shadowColor="#80000000"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/paymentText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/paymentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Proceedeeding with Mock Payment..."
+        android:fontFamily="@font/verdana_font"
+        android:textAlignment="center"
+        android:textColor="@color/purpleTitle"
+        android:textSize="32sp"
+        app:layout_constraintTop_toBottomOf="@id/paymentTitle"
+        app:layout_constraintBottom_toTopOf="@+id/payButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        android:lineSpacingExtra="8sp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"/>
+
+    <Button
+        android:id="@+id/payButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/purpleTitle"
+        android:text="Pay Now"
+        android:fontFamily="@font/verdana_font"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/paymentText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/purpleTitle"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@color/bottom_nav_icon_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/BottomNavigationViewStyle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

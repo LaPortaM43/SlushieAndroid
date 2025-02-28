@@ -26,6 +26,33 @@ class LoginActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+            when (item.itemId) {
+                R.id.navigation_menu -> {
+                    // Menu button click
+                    val menuIntent = Intent(this, MenuActivity::class.java)
+                    startActivity(menuIntent)
+                    true
+                }
+                else -> false
+            }
+            when (item.itemId) {
+                R.id.navigation_order -> {
+                    // Menu button click
+                    val orderIntent = Intent(this, OrderActivity::class.java)
+                    startActivity(orderIntent)
+                    true
+                }
+                else -> false
+            }
+            when (item.itemId) {
+                R.id.navigation_history-> {
+                    // Menu button click
+                    val historyIntent = Intent(this, HistoryActivity::class.java)
+                    startActivity(historyIntent)
+                    true
+                }
+                else -> false
+            }
         }
     }
 }

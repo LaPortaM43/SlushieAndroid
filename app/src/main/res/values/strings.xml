@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">feb14Slushie</string>
+    <string-array name="flavors_array">
+        <item>Select Option</item>
+        <item>Vanilla</item>
+        <item>Chocolate</item>
+        <item>Strawberry</item>
+        <item>Blueberry</item>
+        <item>Raspberry</item>
+    </string-array>
+
+    <string-array name="branch_array">
+        <item>Select Option</item>
+        <item>123 Monmouth Street</item>
+        <item>234 Monmouth Street</item>
+    </string-array>
 </resources>
