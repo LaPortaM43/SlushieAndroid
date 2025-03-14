@@ -13,7 +13,6 @@ class ThanksActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_thanks)
 
-
         // Initialize BottomNavigationView
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
@@ -33,15 +32,6 @@ class ThanksActivity : AppCompatActivity() {
                     // Menu button click
                     val menuIntent = Intent(this, MenuActivity::class.java)
                     startActivity(menuIntent)
-                    true
-                }
-                else -> false
-            }
-            when (item.itemId) {
-                R.id.navigation_order -> {
-                    // Menu button click
-                    val orderIntent = Intent(this, OrderActivity::class.java)
-                    startActivity(orderIntent)
                     true
                 }
                 else -> false

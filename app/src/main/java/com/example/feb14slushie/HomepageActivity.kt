@@ -20,7 +20,7 @@ class HomepageActivity : AppCompatActivity() {
             v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).withEndAction {
                 v.animate().scaleX(1f).scaleY(1f).setDuration(100)
             }
-            startActivity(Intent(this, OrderActivity::class.java))
+            startActivity(Intent(this, GuestOrderActivity::class.java))
         }
 
         // Initialize BottomNavigationView
@@ -42,15 +42,6 @@ class HomepageActivity : AppCompatActivity() {
                     // Menu button click
                     val menuIntent = Intent(this, MenuActivity::class.java)
                     startActivity(menuIntent)
-                    true
-                }
-                else -> false
-            }
-            when (item.itemId) {
-                R.id.navigation_order -> {
-                    // Menu button click
-                    val orderIntent = Intent(this, OrderActivity::class.java)
-                    startActivity(orderIntent)
                     true
                 }
                 else -> false

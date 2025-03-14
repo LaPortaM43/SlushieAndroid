@@ -36,15 +36,6 @@ class LoginActivity : AppCompatActivity() {
                 else -> false
             }
             when (item.itemId) {
-                R.id.navigation_order -> {
-                    // Menu button click
-                    val orderIntent = Intent(this, OrderActivity::class.java)
-                    startActivity(orderIntent)
-                    true
-                }
-                else -> false
-            }
-            when (item.itemId) {
                 R.id.navigation_history-> {
                     // Menu button click
                     val historyIntent = Intent(this, HistoryActivity::class.java)
