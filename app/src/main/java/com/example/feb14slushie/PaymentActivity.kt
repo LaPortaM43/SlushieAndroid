@@ -5,6 +5,7 @@ package com.example.feb14slushie
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -15,6 +16,7 @@ class PaymentActivity : AppCompatActivity() {
 
         // Pay Now Button Click
         findViewById<Button>(R.id.payButton).setOnClickListener { v ->
+            Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show()
             // Makes button slightly smaller when clicked
             v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).withEndAction {
                 v.animate().scaleX(1f).scaleY(1f).setDuration(100)

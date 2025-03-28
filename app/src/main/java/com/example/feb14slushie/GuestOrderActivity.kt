@@ -1,5 +1,7 @@
 package com.example.feb14slushie
 
+// GuestOrderActivity.kt
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
@@ -15,37 +17,27 @@ class GuestOrderActivity : AppCompatActivity() {
     private lateinit var emailEdit: EditText
     private lateinit var addressEdit: EditText
     private lateinit var branchSpinner: Spinner
-    private lateinit var firstFlavorSpinner: Spinner
-    private lateinit var secondFlavorSpinner: Spinner
-    private lateinit var thirdFlavorSpinner: Spinner
     private lateinit var orderButton: Button
+    private lateinit var flavorsContainer: LinearLayout
+    private val selectedFlavors = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_guest_order)
 
-        // Initialize Firestore
         db = FirebaseFirestore.getInstance()
 
-        // Initialize views
         nameEdit = findViewById(R.id.nameEdit)
         emailEdit = findViewById(R.id.emailEdit)
         addressEdit = findViewById(R.id.addressEdit)
         branchSpinner = findViewById(R.id.branchSpinner)
-        firstFlavorSpinner = findViewById(R.id.firstFlavorSpinner)
-        secondFlavorSpinner = findViewById(R.id.secondFlavorSpinner)
-        thirdFlavorSpinner = findViewById(R.id.thirdFlavorSpinner)
         orderButton = findViewById(R.id.orderButton)
+        flavorsContainer = findViewById(R.id.flavorsContainer)
 
-        // Set up branch spinner
         setupSpinner(branchSpinner, R.array.branch_array)
 
-        // Set up flavor spinners
-        setupSpinner(firstFlavorSpinner, R.array.flavors_array)
-        setupSpinner(secondFlavorSpinner, R.array.flavors_array)
-        setupSpinner(thirdFlavorSpinner, R.array.flavors_array)
+        setupFlavorCheckboxes()
 
-        // Handle order button click
         orderButton.setOnClickListener {
             placeOrder()
         }
@@ -79,17 +71,52 @@ class GuestOrderActivity : AppCompatActivity() {
         spinner.adapter = adapter
     }
 
+    private fun setupFlavorCheckboxes() {
+        val flavors = resources.getStringArray(R.array.flavors_array)
+            .filter { it != "Select Option" }
+
+        flavors.forEach { flavorName ->
+            val checkBox = CheckBox(this).apply {
+                text = flavorName
+                textSize = 16f
+                setOnCheckedChangeListener { buttonView, isChecked ->
+                    if (isChecked) {
+                        if (selectedFlavors.size >= 3) {
+                            buttonView.isChecked = false
+                            Toast.makeText(
+                                this@GuestOrderActivity,
+                                "Maximum of 3 flavors allowed",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            selectedFlavors.add(flavorName)
+                        }
+                    } else {
+                        selectedFlavors.remove(flavorName)
+                    }
+
+                    // Update all checkboxes' enabled state
+                    updateCheckboxesEnabledState()
+                }
+            }
+            flavorsContainer.addView(checkBox)
+        }
+    }
+
+    private fun updateCheckboxesEnabledState() {
+
+        for (i in 0 until flavorsContainer.childCount) {
+            val checkBox = flavorsContainer.getChildAt(i) as CheckBox
+            checkBox.isEnabled = selectedFlavors.size < 3 || checkBox.isChecked
+        }
+    }
+
     private fun placeOrder() {
-        // Collect input values
         val name = nameEdit.text.toString().trim()
         val email = emailEdit.text.toString().trim()
         val address = addressEdit.text.toString().trim()
         val branch = branchSpinner.selectedItem as? String
-        val flavor1 = firstFlavorSpinner.selectedItem as? String
-        val flavor2 = secondFlavorSpinner.selectedItem as? String
-        val flavor3 = thirdFlavorSpinner.selectedItem as? String
 
-        // Validate input
         if (name.isEmpty() || email.isEmpty() || address.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields.", Toast.LENGTH_SHORT).show()
             return
@@ -100,7 +127,7 @@ class GuestOrderActivity : AppCompatActivity() {
             return
         }
 
-        if (flavor1 == "Select Option" && flavor2 == "Select Option" && flavor3 == "Select Option") {
+        if (selectedFlavors.isEmpty()) {
             Toast.makeText(this, "Please select at least one flavor.", Toast.LENGTH_SHORT).show()
             return
         }
@@ -120,9 +147,9 @@ class GuestOrderActivity : AppCompatActivity() {
             "price" to 10,
             "deliveryAddress" to address,
             "branchID" to branch,
-            "flavor1ID" to flavorMap[flavor1],
-            "flavor2ID" to flavorMap[flavor2],
-            "flavor3ID" to flavorMap[flavor3],
+            "flavor1ID" to if (selectedFlavors.size > 0) flavorMap[selectedFlavors[0]] else null,
+            "flavor2ID" to if (selectedFlavors.size > 1) flavorMap[selectedFlavors[1]] else null,
+            "flavor3ID" to if (selectedFlavors.size > 2) flavorMap[selectedFlavors[2]] else null,
             "status" to "pending",
             "timestamp" to Date(),
             "customerName" to name,
@@ -133,7 +160,7 @@ class GuestOrderActivity : AppCompatActivity() {
         db.collection("orders")
             .add(order)
             .addOnSuccessListener { documentReference ->
-                Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show()
+                // Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, PaymentActivity::class.java).apply {
                     putExtra("orderId", documentReference.id)
                     putExtra("customerId", "guest")
@@ -145,3 +172,4 @@ class GuestOrderActivity : AppCompatActivity() {
             }
     }
 }
+

@@ -4,140 +4,149 @@ package com.example.feb14slushie
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
-import android.view.View
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
 class OrderActivity : AppCompatActivity() {
+
+    private lateinit var db: FirebaseFirestore
+    private lateinit var branchSpinner: Spinner
+    private lateinit var orderButton: Button
+    private lateinit var flavorsContainer: LinearLayout
+    private val selectedFlavors = mutableListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order)
 
-        // Branch Spinner
-        val br_spinner = findViewById<Spinner>(R.id.branchSpinner)
-        val br_adapter = ArrayAdapter.createFromResource(
-            this, R.array.branch_array, android.R.layout.simple_spinner_item)
+        db = FirebaseFirestore.getInstance()
 
-        br_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        br_spinner.adapter = br_adapter
+        branchSpinner = findViewById(R.id.branchSpinner)
+        orderButton = findViewById(R.id.orderButton)
+        flavorsContainer = findViewById(R.id.flavorsContainer)
 
-        br_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent?.getItemAtPosition(position) as? String
-                if (selectedItem == "Select Option") {
-                    // do nothing
-                } else {
-                    val item = parent?.getItemAtPosition(position) as String
-                    Toast.makeText(this@OrderActivity, item, Toast.LENGTH_SHORT).show()
+        setupSpinner(branchSpinner, R.array.branch_array)
+
+        setupFlavorCheckboxes()
+
+        orderButton.setOnClickListener {
+            placeOrder()
+        }
+
+        setupBottomNavigation()
+    }
+
+    private fun setupSpinner(spinner: Spinner, arrayResource: Int) {
+        val adapter = ArrayAdapter.createFromResource(
+            this, arrayResource, android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+    }
+
+    private fun setupFlavorCheckboxes() {
+
+        val flavors = resources.getStringArray(R.array.flavors_array)
+            .filter { it != "Select Option" }
+
+        flavors.forEach { flavorName ->
+            val checkBox = CheckBox(this).apply {
+                text = flavorName
+                textSize = 16f
+                setOnCheckedChangeListener { buttonView, isChecked ->
+                    if (isChecked) {
+                        if (selectedFlavors.size >= 3) {
+                            buttonView.isChecked = false
+                            Toast.makeText(
+                                this@OrderActivity,
+                                "Maximum 3 flavors allowed",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            selectedFlavors.add(flavorName)
+                        }
+                    } else {
+                        selectedFlavors.remove(flavorName)
+                    }
+                    updateCheckboxesEnabledState()
                 }
             }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            flavorsContainer.addView(checkBox)
+        }
+    }
+
+    private fun updateCheckboxesEnabledState() {
+
+        for (i in 0 until flavorsContainer.childCount) {
+            val checkBox = flavorsContainer.getChildAt(i) as CheckBox
+
+            checkBox.isEnabled = selectedFlavors.size < 3 || checkBox.isChecked
+        }
+    }
+
+    private fun placeOrder() {
+        val branch = branchSpinner.selectedItem as? String
+
+        if (branch == "Select Option" || branch.isNullOrEmpty()) {
+            Toast.makeText(this, "Please select a branch.", Toast.LENGTH_SHORT).show()
+            return
         }
 
-        // Flavor1 Spinner
-        val f1_spinner = findViewById<Spinner>(R.id.firstFlavorSpinner)
-        val f1_adapter = ArrayAdapter.createFromResource(
-            this, R.array.flavors_array, android.R.layout.simple_spinner_item)
+        if (selectedFlavors.isEmpty()) {
+            Toast.makeText(this, "Please select at least one flavor.", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        f1_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        f1_spinner.adapter = f1_adapter
+        // Map flavors to IDs
+        val flavorMap = mapOf(
+            "Vanilla" to "f1av1",
+            "Chocolate" to "f1av2",
+            "Strawberry" to "f1av3",
+            "Blueberry" to "f1av4",
+            "Raspberry" to "f1av5"
+        )
 
-        f1_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent?.getItemAtPosition(position) as? String
-                if (selectedItem == "Select Option") {
-                    // do nothing
-                } else {
-                    val item = parent?.getItemAtPosition(position) as String
-                    Toast.makeText(this@OrderActivity, item, Toast.LENGTH_SHORT).show()
+        val order = hashMapOf(
+            "price" to 10,
+            "branchID" to branch,
+            "flavor1ID" to if (selectedFlavors.size > 0) flavorMap[selectedFlavors[0]] else null,
+            "flavor2ID" to if (selectedFlavors.size > 1) flavorMap[selectedFlavors[1]] else null,
+            "flavor3ID" to if (selectedFlavors.size > 2) flavorMap[selectedFlavors[2]] else null,
+            "status" to "pending",
+            "timestamp" to Date()
+        )
+
+        db.collection("orders")
+            .add(order)
+            .addOnSuccessListener { documentReference ->
+                // Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, PaymentActivity::class.java).apply {
+                    putExtra("orderId", documentReference.id)
                 }
+                startActivity(intent)
             }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-        // Flavor2 Spinner
-        val f2_spinner = findViewById<Spinner>(R.id.secondFlavorSpinner)
-        val f2_adapter = ArrayAdapter.createFromResource(
-            this, R.array.flavors_array, android.R.layout.simple_spinner_item)
-
-        f2_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        f2_spinner.adapter = f2_adapter
-
-        f2_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
-                val selectedItem = parent?.getItemAtPosition(position) as? String
-                if (selectedItem == "Select Option") {
-                    // do nothing
-                } else {
-                    val item = parent?.getItemAtPosition(position) as String
-                    Toast.makeText(this@OrderActivity, item, Toast.LENGTH_SHORT).show()
-                }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to place order: ${e.message}", Toast.LENGTH_SHORT).show()
             }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-        // Flavor3 Spinner
-        val f3_spinner = findViewById<Spinner>(R.id.thirdFlavorSpinner)
-        val f3_adapter = ArrayAdapter.createFromResource(
-            this, R.array.flavors_array, android.R.layout.simple_spinner_item)
+    }
 
-        f3_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        f3_spinner.adapter = f2_adapter
-
-        f3_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent?.getItemAtPosition(position) as? String
-                if (selectedItem == "Select Option") {
-                    // do nothing
-                } else {
-                    val item = parent?.getItemAtPosition(position) as String
-                    Toast.makeText(this@OrderActivity, item, Toast.LENGTH_SHORT).show()
-                }
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-
-        // Place Order Button Click
-        findViewById<Button>(R.id.orderButton).setOnClickListener { v ->
-            // Makes button slightly smaller when clicked
-            v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).withEndAction {
-                v.animate().scaleX(1f).scaleY(1f).setDuration(100)
-            }
-            startActivity(Intent(this, PaymentActivity::class.java))
-        }
-
-        // Initialize BottomNavigationView
+    private fun setupBottomNavigation() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
-        // Set item selection listener
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    // Home button click
-                    val homeIntent = Intent(this, MainActivity::class.java)
-                    startActivity(homeIntent)
+                    startActivity(Intent(this, MainActivity::class.java))
                     true
                 }
-                else -> false
-            }
-            when (item.itemId) {
                 R.id.navigation_menu -> {
-                    // Menu button click
-                    val menuIntent = Intent(this, MenuActivity::class.java)
-                    startActivity(menuIntent)
+                    startActivity(Intent(this, MenuActivity::class.java))
                     true
                 }
-                else -> false
-            }
-            when (item.itemId) {
-                R.id.navigation_history-> {
-                    // Menu button click
-                    val historyIntent = Intent(this, HistoryActivity::class.java)
-                    startActivity(historyIntent)
+                R.id.navigation_history -> {
+                    startActivity(Intent(this, HistoryActivity::class.java))
                     true
                 }
                 else -> false
