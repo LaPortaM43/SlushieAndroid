@@ -20,16 +20,17 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var db: FirebaseFirestore
     private lateinit var welcomeTextView: TextView
     private lateinit var logoutButton: Button
+    private lateinit var backButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
 
-        // Initialize Firebase instances
         auth = Firebase.auth
         db = FirebaseFirestore.getInstance()
         welcomeTextView = findViewById(R.id.welcomeTextView)
         logoutButton = findViewById(R.id.LogoutButton)
+        backButton = findViewById(R.id.backButton)
 
         updateUI()
 
@@ -52,12 +53,18 @@ class HomepageActivity : AppCompatActivity() {
             }
         }
 
-        // Bottom Navigation setup
+        findViewById<Button>(R.id.backButton).setOnClickListener { v ->
+            v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).withEndAction {
+                v.animate().scaleX(1f).scaleY(1f).setDuration(100)
+            }
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, HomepageActivity::class.java))
                     true
                 }
                 R.id.navigation_menu -> {
@@ -82,6 +89,7 @@ class HomepageActivity : AppCompatActivity() {
         if (currentUser != null) {
 
             logoutButton.visibility = Button.VISIBLE
+            backButton.visibility = Button.GONE
 
             db.collection("customers").document(currentUser.uid)
                 .get()
@@ -93,6 +101,7 @@ class HomepageActivity : AppCompatActivity() {
                 }
         } else {
             logoutButton.visibility = Button.GONE
+            backButton.visibility = Button.VISIBLE
             welcomeTextView.text = "Welcome!"
         }
     }

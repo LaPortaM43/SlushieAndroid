@@ -13,16 +13,12 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-
-        // Initialize BottomNavigationView
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
-        // Set item selection listener
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    // Home button click
-                    val homeIntent = Intent(this, MainActivity::class.java)
+                    val homeIntent = Intent(this, HomepageActivity::class.java)
                     startActivity(homeIntent)
                     true
                 }
@@ -30,7 +26,6 @@ class MenuActivity : AppCompatActivity() {
             }
             when (item.itemId) {
                 R.id.navigation_menu -> {
-                    // Menu button click
                     val menuIntent = Intent(this, MenuActivity::class.java)
                     startActivity(menuIntent)
                     true
@@ -39,7 +34,6 @@ class MenuActivity : AppCompatActivity() {
             }
             when (item.itemId) {
                 R.id.navigation_history-> {
-                    // Menu button click
                     val historyIntent = Intent(this, HistoryActivity::class.java)
                     startActivity(historyIntent)
                     true

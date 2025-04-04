@@ -42,12 +42,11 @@ class GuestOrderActivity : AppCompatActivity() {
             placeOrder()
         }
 
-        // Initialize BottomNavigationView
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, HomepageActivity::class.java))
                     true
                 }
                 R.id.navigation_menu -> {
@@ -95,7 +94,6 @@ class GuestOrderActivity : AppCompatActivity() {
                         selectedFlavors.remove(flavorName)
                     }
 
-                    // Update all checkboxes' enabled state
                     updateCheckboxesEnabledState()
                 }
             }
@@ -132,7 +130,6 @@ class GuestOrderActivity : AppCompatActivity() {
             return
         }
 
-        // Map flavors to IDs
         val flavorMap = mapOf(
             "Vanilla" to "f1av1",
             "Chocolate" to "f1av2",
@@ -141,7 +138,6 @@ class GuestOrderActivity : AppCompatActivity() {
             "Raspberry" to "f1av5"
         )
 
-        // Prepare order data
         val order = hashMapOf(
             "customerID" to "guest",
             "price" to 10,

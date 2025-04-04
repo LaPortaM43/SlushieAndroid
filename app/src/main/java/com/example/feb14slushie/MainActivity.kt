@@ -14,65 +14,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Guest Button Click
         findViewById<Button>(R.id.guestButton).setOnClickListener { v ->
-            // Makes button slightly smaller when clicked
             v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).withEndAction {
                 v.animate().scaleX(1f).scaleY(1f).setDuration(100)
             }
             startActivity(Intent(this, HomepageActivity::class.java))
         }
 
-        // Login Button Click
         findViewById<Button>(R.id.loginButton).setOnClickListener { v ->
-            // Makes button slightly smaller when clicked
             v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).withEndAction {
                 v.animate().scaleX(1f).scaleY(1f).setDuration(100)
             }
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
-        // Register Button Click
         findViewById<Button>(R.id.registerButton).setOnClickListener { v ->
-            // Makes button slightly smaller when clicked
             v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).withEndAction {
                 v.animate().scaleX(1f).scaleY(1f).setDuration(100)
             }
             startActivity(Intent(this, RegisterActivity::class.java))
-        }
-
-        // Initialize BottomNavigationView
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
-        // Set item selection listener
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_home -> {
-                    // Home button click
-                    val homeIntent = Intent(this, MainActivity::class.java)
-                    startActivity(homeIntent)
-                    true
-                }
-                else -> false
-            }
-            when (item.itemId) {
-                R.id.navigation_menu -> {
-                    // Menu button click
-                    val menuIntent = Intent(this, MenuActivity::class.java)
-                    startActivity(menuIntent)
-                    true
-                }
-                else -> false
-            }
-            when (item.itemId) {
-                R.id.navigation_history-> {
-                    // Menu button click
-                    val historyIntent = Intent(this, HistoryActivity::class.java)
-                    startActivity(historyIntent)
-                    true
-                }
-                else -> false
-            }
         }
     }
 }

@@ -14,25 +14,20 @@ class PaymentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
 
-        // Pay Now Button Click
         findViewById<Button>(R.id.payButton).setOnClickListener { v ->
             Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show()
-            // Makes button slightly smaller when clicked
             v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).withEndAction {
                 v.animate().scaleX(1f).scaleY(1f).setDuration(100)
             }
             startActivity(Intent(this, ThanksActivity::class.java))
         }
 
-        // Initialize BottomNavigationView
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
-        // Set item selection listener
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    // Home button click
-                    val homeIntent = Intent(this, MainActivity::class.java)
+                    val homeIntent = Intent(this, HomepageActivity::class.java)
                     startActivity(homeIntent)
                     true
                 }
@@ -40,7 +35,6 @@ class PaymentActivity : AppCompatActivity() {
             }
             when (item.itemId) {
                 R.id.navigation_menu -> {
-                    // Menu button click
                     val menuIntent = Intent(this, MenuActivity::class.java)
                     startActivity(menuIntent)
                     true
@@ -49,7 +43,6 @@ class PaymentActivity : AppCompatActivity() {
             }
             when (item.itemId) {
                 R.id.navigation_history-> {
-                    // Menu button click
                     val historyIntent = Intent(this, HistoryActivity::class.java)
                     startActivity(historyIntent)
                     true

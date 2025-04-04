@@ -17,11 +17,9 @@ import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
 
-    //Firebase Instance
     private lateinit var auth: FirebaseAuth
     private val db = Firebase.firestore
 
-    //UI Elements
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var nameEditText: EditText
@@ -31,10 +29,8 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        //init Firebase Auth
         auth = Firebase.auth
 
-        //init UI elements
         emailEditText = findViewById(R.id.emailEditText)
         passwordEditText = findViewById(R.id.passwordEditText)
         nameEditText = findViewById(R.id.fullNameEditText)
@@ -45,11 +41,10 @@ class RegisterActivity : AppCompatActivity() {
             registerUser()
         }
 
-        // Bottom navigation setup (optimized)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_home -> startActivity(Intent(this, MainActivity::class.java))
+                R.id.navigation_home -> startActivity(Intent(this, HomepageActivity::class.java))
                 R.id.navigation_menu -> startActivity(Intent(this, MenuActivity::class.java))
                 R.id.navigation_history -> startActivity(Intent(this, HistoryActivity::class.java))
             }
@@ -65,7 +60,7 @@ class RegisterActivity : AppCompatActivity() {
 
         if (email.isEmpty() || password.isEmpty() || name.isEmpty() || address.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
-            return  // Add this to exit the function if validation fails
+            return
         }
 
         if (password.length < 6) {
@@ -97,7 +92,6 @@ class RegisterActivity : AppCompatActivity() {
                         }
                 }
             } else {
-                // Handle registration failure
                 val errorMessage = when (val exception = task.exception) {
                     is FirebaseAuthWeakPasswordException -> "Password is too weak"
                     else -> "Registration failed: ${exception?.message ?: "Unknown error"}"

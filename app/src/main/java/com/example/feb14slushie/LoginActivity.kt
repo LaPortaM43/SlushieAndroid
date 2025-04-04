@@ -24,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Initialize Firebase Auth
         auth = Firebase.auth
 
         usernameEditText = findViewById(R.id.usernameEditText)
@@ -35,12 +34,11 @@ class LoginActivity : AppCompatActivity() {
             loginUser()
         }
 
-        // BottomNavigationView setup
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, HomepageActivity::class.java))
                     true
                 }
                 R.id.navigation_menu -> {

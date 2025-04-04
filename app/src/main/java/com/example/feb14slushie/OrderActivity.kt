@@ -100,7 +100,6 @@ class OrderActivity : AppCompatActivity() {
             return
         }
 
-        // Map flavors to IDs
         val flavorMap = mapOf(
             "Vanilla" to "f1av1",
             "Chocolate" to "f1av2",
@@ -122,7 +121,6 @@ class OrderActivity : AppCompatActivity() {
         db.collection("orders")
             .add(order)
             .addOnSuccessListener { documentReference ->
-                // Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, PaymentActivity::class.java).apply {
                     putExtra("orderId", documentReference.id)
                 }
@@ -138,7 +136,7 @@ class OrderActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, HomepageActivity::class.java))
                     true
                 }
                 R.id.navigation_menu -> {
