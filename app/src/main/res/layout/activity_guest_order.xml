@@ -141,7 +141,64 @@
             android:id="@+id/flavorsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
+
+            <CheckBox
+                android:id="@+id/vanillaCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vanilla"
+                android:textSize="16sp"
+                android:fontFamily="@font/verdana_font"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:minHeight="0dp"/>
+
+            <CheckBox
+                android:id="@+id/chocolateCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chocolate"
+                android:textSize="16sp"
+                android:fontFamily="@font/verdana_font"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:minHeight="0dp"/>
+
+            <CheckBox
+                android:id="@+id/strawberryCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Strawberry"
+                android:textSize="16sp"
+                android:fontFamily="@font/verdana_font"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:minHeight="0dp"/>
+
+            <CheckBox
+                android:id="@+id/blueberryCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Blueberry"
+                android:textSize="16sp"
+                android:fontFamily="@font/verdana_font"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:minHeight="0dp"/>
+
+            <CheckBox
+                android:id="@+id/raspberryCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Raspberry"
+                android:textSize="16sp"
+                android:fontFamily="@font/verdana_font"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:minHeight="0dp"/>
 
         </LinearLayout>
     </ScrollView>

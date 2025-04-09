@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- activity_menu -->
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -38,190 +36,63 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/menuTitle"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@id/menuTitle">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/purpleDescription"/>
+        <View android:layout_width="match_parent" android:layout_height="3dp" android:background="@color/purpleDescription"/>
 
-        <Button
-            android:id="@+id/flavor1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/purpleTitleBackground"
-            android:fontFamily="@font/verdana_font"
-            android:text="Vanilla"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textColor="@color/purpleTitle" />
+        <!-- Vanilla -->
+        <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/purpleTitleBackground" app:cardCornerRadius="8dp" app:cardElevation="4dp">
+            <TextView android:id="@+id/flavor1" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Vanilla" android:textSize="20sp" android:textStyle="bold" android:gravity="center"
+                android:fontFamily="@font/verdana_font" android:textColor="@color/purpleTitle" android:padding="12dp"/>
+        </androidx.cardview.widget.CardView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/purpleDescription"/>
+        <View android:layout_width="match_parent" android:layout_height="3dp" android:background="@color/purpleDescription"/>
 
-        <Button
-            android:id="@+id/flavor2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/purpleTitleBackground"
-            android:text="Chocolate"
-            android:fontFamily="@font/verdana_font"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/purpleTitle" />
+        <!-- Chocolate -->
+        <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/purpleTitleBackground" app:cardCornerRadius="8dp" app:cardElevation="4dp">
+            <TextView android:id="@+id/flavor2" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Chocolate" android:textSize="20sp" android:textStyle="bold" android:gravity="center"
+                android:fontFamily="@font/verdana_font" android:textColor="@color/purpleTitle" android:padding="12dp"/>
+        </androidx.cardview.widget.CardView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/purpleDescription" />
+        <View android:layout_width="match_parent" android:layout_height="3dp" android:background="@color/purpleDescription"/>
 
-        <Button
-            android:id="@+id/flavor3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/purpleTitleBackground"
-            android:text="Strawberry"
-            android:fontFamily="@font/verdana_font"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/purpleTitle" />
+        <!-- Strawberry -->
+        <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/purpleTitleBackground" app:cardCornerRadius="8dp" app:cardElevation="4dp">
+            <TextView android:id="@+id/flavor3" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Strawberry" android:textSize="20sp" android:textStyle="bold" android:gravity="center"
+                android:fontFamily="@font/verdana_font" android:textColor="@color/purpleTitle" android:padding="12dp"/>
+        </androidx.cardview.widget.CardView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/purpleDescription"/>
+        <View android:layout_width="match_parent" android:layout_height="3dp" android:background="@color/purpleDescription"/>
 
-        <Button
-            android:id="@+id/flavor4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/purpleTitleBackground"
-            android:text="Blueberry"
-            android:fontFamily="@font/verdana_font"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/purpleTitle" />
+        <!-- Blueberry -->
+        <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/purpleTitleBackground" app:cardCornerRadius="8dp" app:cardElevation="4dp">
+            <TextView android:id="@+id/flavor4" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Blueberry" android:textSize="20sp" android:textStyle="bold" android:gravity="center"
+                android:fontFamily="@font/verdana_font" android:textColor="@color/purpleTitle" android:padding="12dp"/>
+        </androidx.cardview.widget.CardView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/purpleDescription"/>
+        <View android:layout_width="match_parent" android:layout_height="3dp" android:background="@color/purpleDescription"/>
 
-        <Button
-            android:id="@+id/flavor5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/purpleTitleBackground"
-            android:text="Raspberry"
-            android:fontFamily="@font/verdana_font"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/purpleTitle" />
+        <!-- Raspberry -->
+        <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/purpleTitleBackground" app:cardCornerRadius="8dp" app:cardElevation="4dp">
+            <TextView android:id="@+id/flavor5" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Raspberry" android:textSize="20sp" android:textStyle="bold" android:gravity="center"
+                android:fontFamily="@font/verdana_font" android:textColor="@color/purpleTitle" android:padding="12dp"/>
+        </androidx.cardview.widget.CardView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/purpleDescription"/>
-
-        <Button
-            android:id="@+id/flavor6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/purpleTitleBackground"
-            android:text="Cherry"
-            android:fontFamily="@font/verdana_font"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/purpleTitle" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/purpleDescription"/>
-
-        <Button
-            android:id="@+id/flavor7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/purpleTitleBackground"
-            android:text="Lemonade"
-            android:fontFamily="@font/verdana_font"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/purpleTitle" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/purpleDescription"/>
-
-        <Button
-            android:id="@+id/flavor8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/purpleTitleBackground"
-            android:text="Watermelon"
-            android:fontFamily="@font/verdana_font"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/purpleTitle" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/purpleDescription"/>
-
-        <Button
-            android:id="@+id/flavor9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/purpleTitleBackground"
-            android:text="Grape"
-            android:fontFamily="@font/verdana_font"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/purpleTitle" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/purpleDescription"/>
-
-        <Button
-            android:id="@+id/flavor10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/purpleTitleBackground"
-            android:text="Cola"
-            android:fontFamily="@font/verdana_font"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/purpleTitle" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/purpleDescription"/>
-
+        <View android:layout_width="match_parent" android:layout_height="3dp" android:background="@color/purpleDescription"/>
 
     </LinearLayout>
 
-    <!-- Bottom Navigation Bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
@@ -232,6 +103,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        style="@style/BottomNavigationViewStyle" />
+        style="@style/BottomNavigationViewStyle"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

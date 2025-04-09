@@ -20,6 +20,7 @@ class GuestOrderActivity : AppCompatActivity() {
     private lateinit var orderButton: Button
     private lateinit var flavorsContainer: LinearLayout
     private val selectedFlavors = mutableListOf<String>()
+    private val flavorCheckBoxes = mutableListOf<CheckBox>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +36,14 @@ class GuestOrderActivity : AppCompatActivity() {
         flavorsContainer = findViewById(R.id.flavorsContainer)
 
         setupSpinner(branchSpinner, R.array.branch_array)
+
+        flavorCheckBoxes.addAll(listOf(
+            findViewById(R.id.vanillaCheckBox),
+            findViewById(R.id.chocolateCheckBox),
+            findViewById(R.id.strawberryCheckBox),
+            findViewById(R.id.blueberryCheckBox),
+            findViewById(R.id.raspberryCheckBox)
+        ))
 
         setupFlavorCheckboxes()
 
@@ -71,40 +80,30 @@ class GuestOrderActivity : AppCompatActivity() {
     }
 
     private fun setupFlavorCheckboxes() {
-        val flavors = resources.getStringArray(R.array.flavors_array)
-            .filter { it != "Select Option" }
-
-        flavors.forEach { flavorName ->
-            val checkBox = CheckBox(this).apply {
-                text = flavorName
-                textSize = 16f
-                setOnCheckedChangeListener { buttonView, isChecked ->
-                    if (isChecked) {
-                        if (selectedFlavors.size >= 3) {
-                            buttonView.isChecked = false
-                            Toast.makeText(
-                                this@GuestOrderActivity,
-                                "Maximum of 3 flavors allowed",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            selectedFlavors.add(flavorName)
-                        }
+        flavorCheckBoxes.forEach { checkBox ->
+            checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                val flavorName = buttonView.text.toString()
+                if (isChecked) {
+                    if (selectedFlavors.size >= 3) {
+                        buttonView.isChecked = false
+                        Toast.makeText(
+                            this@GuestOrderActivity,
+                            "Maximum of 3 flavors allowed",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     } else {
-                        selectedFlavors.remove(flavorName)
+                        selectedFlavors.add(flavorName)
                     }
-
-                    updateCheckboxesEnabledState()
+                } else {
+                    selectedFlavors.remove(flavorName)
                 }
+                updateCheckboxesEnabledState()
             }
-            flavorsContainer.addView(checkBox)
         }
     }
 
     private fun updateCheckboxesEnabledState() {
-
-        for (i in 0 until flavorsContainer.childCount) {
-            val checkBox = flavorsContainer.getChildAt(i) as CheckBox
+        flavorCheckBoxes.forEach { checkBox ->
             checkBox.isEnabled = selectedFlavors.size < 3 || checkBox.isChecked
         }
     }
@@ -156,7 +155,6 @@ class GuestOrderActivity : AppCompatActivity() {
         db.collection("orders")
             .add(order)
             .addOnSuccessListener { documentReference ->
-                // Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, PaymentActivity::class.java).apply {
                     putExtra("orderId", documentReference.id)
                     putExtra("customerId", "guest")
@@ -168,4 +166,3 @@ class GuestOrderActivity : AppCompatActivity() {
             }
     }
 }
-

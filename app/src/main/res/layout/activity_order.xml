@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!-- activity_order.xml -->
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_order"
@@ -11,6 +9,7 @@
     tools:context=".OrderActivity"
     android:background="@color/purpleTitleBackground">
 
+    <!-- Centered content container -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -29,10 +28,6 @@
             android:text="Order"
             android:fontFamily="@font/verdana_font"
             android:textColor="@color/purpleTitle"
-            android:shadowColor="#80000000"
-            android:shadowDx="5"
-            android:shadowDy="5"
-            android:shadowRadius="4"
             android:textSize="48sp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
@@ -67,18 +62,74 @@
             android:layout_marginTop="16dp"/>
 
         <ScrollView
-            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:maxHeight="200dp">
+            android:background="@android:color/transparent">
 
             <LinearLayout
                 android:id="@+id/flavorsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"/>
+                android:orientation="vertical"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <CheckBox
+                    android:id="@+id/vanillaCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Vanilla"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/verdana_font"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:minHeight="0dp"/>
+
+                <CheckBox
+                    android:id="@+id/chocolateCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chocolate"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/verdana_font"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:minHeight="0dp"/>
+
+                <CheckBox
+                    android:id="@+id/strawberryCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Strawberry"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/verdana_font"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:minHeight="0dp"/>
+
+                <CheckBox
+                    android:id="@+id/blueberryCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blueberry"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/verdana_font"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:minHeight="0dp"/>
+
+                <CheckBox
+                    android:id="@+id/raspberryCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Raspberry"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/verdana_font"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:minHeight="0dp"/>
+            </LinearLayout>
         </ScrollView>
 
         <Button
@@ -93,6 +144,7 @@
             android:layout_marginTop="16dp"/>
     </LinearLayout>
 
+    <!-- Bottom Navigation Bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
@@ -103,6 +155,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        style="@style/BottomNavigationViewStyle"/>
+        style="@style/BottomNavigationViewStyle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

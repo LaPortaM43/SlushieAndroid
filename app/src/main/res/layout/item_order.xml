@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#fde0ff"
+    android:padding="15dp"
+    android:layout_marginBottom="10dp"
+    android:elevation="4dp"
+    android:backgroundTint="#fde0ff">
+
+    <TextView
+        android:id="@+id/orderIdTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#6b3f7d"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/branchTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#6b3f7d"
+        android:textSize="16sp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/flavorsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#6b3f7d"
+        android:textSize="16sp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#6b3f7d"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/statusTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#6b3f7d"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"/>
+</LinearLayout>
