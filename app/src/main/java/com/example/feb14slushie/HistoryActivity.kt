@@ -135,7 +135,7 @@ class HistoryActivity : AppCompatActivity() {
         val dateTextView = orderView.findViewById<TextView>(R.id.dateTextView)
         val statusTextView = orderView.findViewById<TextView>(R.id.statusTextView)
 
-        orderIdTextView.text = "Order ID: ${orderId.take(8)}..." // Show shortened order ID
+        orderIdTextView.text = "Order ID: ${orderId.take(8)}..."
 
         val branchId = orderData["branchID"] as? String
         branchTextView.text = "Branch: ${branchMap[branchId] ?: "Unknown"}"

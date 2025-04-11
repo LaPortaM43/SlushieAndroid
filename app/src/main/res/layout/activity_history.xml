@@ -1,78 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!-- activity_history.xml -->
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fde0ff"
-    android:padding="10dp">
+    android:background="#fde0ff">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Your Orders"
-            android:textColor="#6b3f7d"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="20dp"/>
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/loginPromptTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Please log in to view your orders."
-            android:textColor="#6b3f7d"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/noOrdersTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No past orders found"
-            android:textColor="#6b3f7d"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:visibility="gone"/>
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigationView"
+        android:padding="10dp">
 
         <LinearLayout
-            android:id="@+id/ordersContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"/>
+            android:orientation="vertical">
 
-        <!-- Bottom Navigation Bar -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/purpleTitle"
-            app:menu="@menu/bottom_nav_menu"
-            app:itemIconTint="@color/bottom_nav_icon_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            style="@style/BottomNavigationViewStyle" />
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="Your Orders"
+                android:textColor="#6b3f7d"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
 
-</ScrollView>
+            <TextView
+                android:id="@+id/loginPromptTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Please log in to view your orders."
+                android:textColor="#6b3f7d"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/noOrdersTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="No past orders found"
+                android:textColor="#6b3f7d"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/ordersContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/purpleTitle"
+        app:itemIconTint="@color/bottom_nav_icon_color"
+        app:menu="@menu/bottom_nav_menu"
+        style="@style/BottomNavigationViewStyle" />
+
+</RelativeLayout>

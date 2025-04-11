@@ -1,17 +1,28 @@
 package com.example.feb14slushie
 
-// MainActivity.kt
-
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        auth = Firebase.auth
+
+        if (auth.currentUser != null) {
+            startActivity(Intent(this, HomepageActivity::class.java))
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_main)
 
         findViewById<Button>(R.id.guestButton).setOnClickListener { v ->
@@ -36,8 +47,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-
-
-
-
