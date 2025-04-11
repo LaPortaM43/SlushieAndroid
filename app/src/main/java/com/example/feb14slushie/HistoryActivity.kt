@@ -33,8 +33,8 @@ class HistoryActivity : AppCompatActivity() {
     )
 
     private val branchMap = mapOf(
-        "b1" to "123 Monmouth Street",
-        "b2" to "234 Monmouth Street"
+        "b1" to "1251 Deal Road",
+        "b2" to "6 Larchwood Ave"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
