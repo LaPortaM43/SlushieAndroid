@@ -47,5 +47,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
-
 }
