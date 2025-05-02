@@ -148,11 +148,9 @@ class HistoryActivity : AppCompatActivity() {
 
         flavorsTextView.text = "Flavors: ${flavors.joinToString(", ")}"
 
-        // Format and display timestamp
         val timestamp = orderData["timestamp"] as? com.google.firebase.Timestamp
         dateTextView.text = timestamp?.toDate()?.toString()?.substring(0, 16) ?: "Date unknown"
 
-        // Display order status
         val status = orderData["status"] as? String ?: "unknown"
         statusTextView.text = "Status: ${status.capitalize()}"
 

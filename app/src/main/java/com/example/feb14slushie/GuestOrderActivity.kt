@@ -177,7 +177,6 @@ class GuestOrderActivity : AppCompatActivity() {
             "customerEmail" to email
         )
 
-        // Submit order to Firestore
         db.collection("orders")
             .add(order)
             .addOnSuccessListener { documentReference ->
